@@ -3,9 +3,11 @@
 import pygame
 import random
 import math
+import sys
+sys.path.append("/home/devesh/F/Programming/Projects/Super-Mario-3/gamelib")
 from pygame.locals import *
 
-from .data import *
+from data import *
 import math
 
 TOP_SIDE    = 0
@@ -190,9 +192,9 @@ class Player(Collidable):
         if self.facing < 0:
             self.image = self.left_images[0]
         if dx > 0:
-            self.image = self.right_images[self.frame/6%5]
+            self.image = self.right_images[int(self.frame/6%5)]
         if dx < 0:
-            self.image = self.left_images[self.frame/6%5]
+            self.image = self.left_images[int(self.frame/6%5)]
         if self.facing > 0 and self.jumping:
             self.image = self.right_images[5]
         if self.facing < 0 and self.jumping:
@@ -287,7 +289,7 @@ class PlatformQ(Collidable):
         self.frame = 0
     def update(self):
         self.frame += 1
-        self.image = self.images[self.frame/39%3]
+        self.image = self.images[int(self.frame/39%3)]
 
 class Pipe(Collidable):
     def __init__(self, pos):
@@ -577,7 +579,7 @@ class Flower(Collidable):
         if self.speed < 0:
             self.images = self.left_images
         self.frame += 1
-        self.image = self.images[self.frame/8%2]
+        self.image = self.images[int(self.frame/8%2)]
         mult = 1
         if self.type == "flower":
             mult=2
@@ -628,7 +630,7 @@ class Rose(Collidable):
         if self.speed < 0:
             self.images = self.left_images
         self.frame += 1
-        self.image = self.images[self.frame/8%2]
+        self.image = self.images[int(self.frame/8%2)]
         mult = 1
         if self.type == "rose":
             mult=2
@@ -687,12 +689,12 @@ class Baddie(Collidable):                            # I am almost sure there so
         if self.speed < 0:
             self.images = self.left_images
         self.frame += 1
-        self.image = self.images[self.frame/8%2]
+        self.image = self.images[int(self.frame/8%2)]
         mult = 1
         if self.type == "slub":
             mult=2
         if self.type == "squidge":
-            self.image = self.images[self.frame/12%2]
+            self.image = self.images[int(self.frame/12%2)]
         else:
             self.move(self.speed*mult, 1)
     
@@ -741,14 +743,14 @@ class Cannon(Collidable):
         if self.speed < 0:
             self.images = self.left_images
         self.frame += 1
-        self.image = self.images[self.frame/2%2]
+        self.image = self.images[int(self.frame/2%2)]
         mult = 1
         if self.type == "cannon":
-            self.image = self.images[self.frame/12%2]
+            self.image = self.images[int(self.frame/12%2)]
         elif self.type == "cannonbig":
-            self.image = self.images[self.frame/12%2]
+            self.image = self.images[int(self.frame/12%2)]
         elif self.type == "smallcannon":
-            self.image = self.images[self.frame/12%2]
+            self.image = self.images[int(self.frame/12%2)]
         else:
             self.move(self.speed*mult, 1)
 
@@ -837,9 +839,9 @@ class BaddieBoom(Collidable):
             self.images = self.left_images
         self.timer += 1
         if self.timer <= 25:
-            self.image = self.images[self.timer/4%2]
+            self.image = self.images[int(self.timer/4%2)]
         elif self.timer < 36:
-            self.image = self.images[self.timer/4%2]
+            self.image = self.images[int(self.timer/4%2)]
         else:
             self.kill()
                                 
@@ -875,7 +877,7 @@ class MushroomGreendie(Collidable):
     def update(self):
         self.timer += 1
         if self.timer < 12:
-            self.image = self.images[self.timer/4%3]
+            self.image = self.images[int(self.timer/4%3)]
         else:
             self.kill()
                                        
@@ -887,7 +889,7 @@ class Coin(Collidable):
         self.frame = 0
     def update(self):
         self.frame += 1
-        self.image = self.images[self.frame/6%4]
+        self.image = self.images[int((self.frame)%4)]
 
 class CoinDie(Collidable):
     def __init__(self, pos):
@@ -899,7 +901,7 @@ class CoinDie(Collidable):
     def update(self):
         self.timer += 1
         if self.timer < 12:
-            self.image = self.images[self.timer/4%3]
+            self.image = self.images[int(self.timer/4%3)]
         else:
             self.kill()
             
@@ -928,7 +930,7 @@ class PlayerDie(Collidable):
         elif self.timer <= 45:
             self.image = self.images[1]
         elif self.timer <= 57:
-            self.image = self.images[self.timer/4%3]
+            self.image = self.images[int(self.timer/4%3)]
         else:
             self.kill()
 
@@ -998,9 +1000,9 @@ class Boss(Collidable):
             if self.speed < 0:
                 self.images = self.left_images
             self.frame += 1
-            self.image = self.images[self.frame/8%2]
+            self.image = self.images[int(self.frame/8%2)]
             if self.hit_timer > 0:
-                self.image = self.images[self.frame/4%2 + 1]
+                self.image = self.images[int(self.frame/4%2 + 1)]
         mult = 1
         if self.die_time > 0:
             mult = 0

@@ -1,12 +1,13 @@
 #! /usr/bin/env python
-
-import pygame, sys
+import sys
+sys.path.append("/home/devesh/F/Programming/Projects/Super-Mario-3/gamelib")
+import pygame
 from pygame.locals import *
 
-from .game import *
-from .ezmenu import *
-from .data import *
-from .cutscenes import *
+from game import *
+from ezmenu import *
+from data import *
+from cutscenes import *
 
 def RunGame(screen):
     Game(screen)

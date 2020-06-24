@@ -1,7 +1,9 @@
 import pygame, os
+import sys
+sys.path.append("/home/devesh/F/Programming/Projects/Super-Mario-3/gamelib")
 from pygame.locals import *
 
-from . import menu, data
+import menu, data
 def main():
     os.environ["SDL_VIDEO_CENTERED"] = "1"
     #pygame.mixer.pre_init(44100, -16, 2, 4096)
